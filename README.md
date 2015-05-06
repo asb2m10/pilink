@@ -1,7 +1,7 @@
 PiLink - OSC to midi for the Raspberry Pi
 =========================================
 
-PiLink is a simple python script that enable to route OSC messages to midi. It has been designed to be run headless on a Raspberry Pi to avoid to setup a computer between a device that send OSC messages (like a iPad running TouchOSC) and a midi instrument.
+PiLink is a simple python script that enable to route OSC messages to midi. It has been designed to be run headless on a Raspberry Pi to avoid to setup a computer between a device that sends OSC messages (like a iPad running TouchOSC) and a midi instrument.
 
 PiLink tries to mimick some of the functionalities of the "defunc" Missing Link device.
 
