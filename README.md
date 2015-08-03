@@ -5,21 +5,25 @@ PiLink is a simple python script that enable to route OSC messages to midi. It h
 
 PiLink tries to mimick some of the functionalities of the "defunc" Missing Link device.
 
-Upon startup, the script will wait until /dev/midi1 is available. To stop the script simply send CTRL-C. If it is running at startup, simply kill it via SSH.
+You can configure the device by using : http:<pi ip adress>:8080
+
+Prerequisites
+-------------
+* Raspberry Pi with WIFI connection (note the WIFI IP of your Pi)
+* Compatible midi devices that works with Linux (the vast majority of midi interface; eg. the Roland GR-55 is plug and play)
+* Source applications from [TouchOSC](http://hexler.net/software/touchosc) or [Lemur](https://liine.net/en/products/lemur)
 
 Installation
 ------------
+* Download source from github (see [Download ZIP] button on the right)
+* Copy the zip (PiLink-master.zip) to /home/pi on the Pi
+* Unzip the content ```~ $ unzip PiLink-master.zip```
+* Set the script to executable: ```~ $ chmod +a+x /home/pi/PiLink-master/pilink.sh```
+* Run the script in console to test if it works : ```~ $ /home/pi/PiLink-master/pilink.sh``` before putting it in the startup scripts
+* In /etc/rc.local, add this line ```/home/pi/PiLink-master/pilink.sh &``` to start PiLink at startup
 
-* Copy the script to /home/pi
-* Set the script to executable: ```$ chmod +a+x /home/pi/pilink.py```
-* In /etc/rc.local, add this line ```/home/pi/pilink.py```
+TODO
+----
+* More stats and logging
+* Make a WIFI access point configuration out of the box for PiLink
 
-Configuration
--------------
-Most of the configuration is done directly in the script :
-
-* MIDI_DEV : change this to the configured midi device (usally /dev/midi1)
-* UDP_PORT : the port that pilink listen for OSC messages
-
-	
-	
