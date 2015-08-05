@@ -206,7 +206,7 @@ def midiInput() :
 
 				outq.put_nowait(toSend)
 
-				if sendport != 0 :
+				if config.sendport != 0 :
 					oscMsg = "/midi/"
 					for i in toSend :
 						oscMsg = oscMsg + "%x " % i
