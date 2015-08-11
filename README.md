@@ -5,7 +5,7 @@ PiLink is a simple python script that enable to route OSC messages to midi. It h
 
 PiLink tries to mimick some of the functionalities of the "defunc" Missing Link device.
 
-You can configure the device by using : http:<pi ip adress>:8080
+You can configure the device by using : http:pi_ip_address:8080
 
 Prerequisites
 -------------
