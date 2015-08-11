@@ -216,7 +216,13 @@ def midiInput() :
                     oscMsg = "/midi/"
                     for i in toSend :
                         oscMsg = oscMsg + "%x " % i
-                    oscMsg = oscMsg + "\0" * (len(oscMsg) % 4)
+
+                    # OSC string must be filled with nulls, multiples of 4
+                    footer = len(oscMsg) % 4
+                    if footer == 0 :
+                        footer = 4
+
+                    oscMsg = oscMsg + ("\0" * footer)
 
                     networkConn = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
                     networkConn.sendto(oscMsg, (config.sendhost, config.sendport))

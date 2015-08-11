@@ -2,5 +2,5 @@
 sendhost = '192.168.1.27'
 sendport = 9000
 receiveport = 8000
-mididev = '/dev/midi1'
+mididev = '/dev/midi2'
 
