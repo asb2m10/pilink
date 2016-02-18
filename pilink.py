@@ -21,10 +21,11 @@ import time
 
 import router
 import web
+import config
 
 def startup() :
-    deamonize(router.midiOutput)
-    deamonize(router.midiInput)
+    #deamonize(router.midiOutput)
+    #deamonize(router.midiInput)
     deamonize(router.oscInput)
     web.start()
 
