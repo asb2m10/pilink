@@ -15,31 +15,34 @@
 
 """
 
-sysex = 0
-midiin = 0
-oscin = 0
-lasterror = ""
-log = ""
+activity = { 'midiin': 0, 'oscin' : 0, 'midiout' : 0 }
+messages = [ "pilink started." ]
 
-def addsysex() :
-	global sysex
-	sysex += 1
+def midiin(msg) :
+	activity['midiin'] = activity['midiin'] + 1
+	log("==> midiin: " + msg)
 
-def addmidiin() :
-	global midiin 
-	midiin += 1
+def midiout(msg) :
+	activity['midiout'] = activity['midiout'] + 1
+	log("<== midiout " + msg)
 
-def addoscin() :
-	global oscin
-	oscin += 1
-
-def log(msg) :
-	global log
-	log = msg
+def oscin(msg) :
+	activity['oscin'] = activity['oscin'] + 1
+	log("==> osc " + msg)
 
 def error(msg) :
-	global lasterror
-	lasterror = msg
-	
+	if len(messages) > 1024 :
+		messages.pop(0)
+	messages.append("ERROR: " + str(msg))
+
+def log(msg) :
+	print msg
+	if len(messages) > 1024 :
+		messages.pop(0)
+	messages.append(msg)
+
 def getStats() :
-	return "midi %d osc %d sysex %d error %s" % (midiin, oscin, sysex, lasterror)
+	ret = {}
+	ret['messages'] = messages[::-1]
+	ret['activity'] = activity
+	return ret

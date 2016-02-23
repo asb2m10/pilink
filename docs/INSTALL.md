@@ -25,7 +25,7 @@ the latest version of PiLink to the home directory and unzip-it. This will creat
 automatically.
 
 ```
-/home/pi $ unzip PiLink-master.zip 
+/home/pi $ unzip pilink-master.zip 
 ```
 
 Then add the 'execute' right to the main startup script :
@@ -43,7 +43,7 @@ test if everything is working. Used CTRL-C to stop the process once you are done
 
 You can test the web interface if you point your browser directly to your Pi device 
 
-	http://`raspberry pi hostname`:8080
+	http://raspberry pi hostname:8080
 
 Once it is working, you can added it to the OS startup script. Use your favorite editor to modify
 /etc/rc.local and add this line at the end :

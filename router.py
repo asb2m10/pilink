@@ -30,7 +30,7 @@ import stats
 outq = Queue.Queue()
 
 def parseHexValue(v) :
-    if  v.startswith("0x") or v.startswith("0X") :
+    if v.startswith("0x") or v.startswith("0X") :
         return int(v,16)
     else :
         return int(v,10)
@@ -151,7 +151,7 @@ def osc2Midi(msg) :
             if action == 'note' :
                 midiMsg = [ ( '0x90' + chl ), int(msgToken[0]), int(msgToken[1]) ]
             else :
-                print("Unknown OSC action %s" % action)
+                stats.error("Unknown OSC action %s" % action)
 
     return midiMsg
 
@@ -173,15 +173,15 @@ def oscInput() :
                     parsedMsg = []
                     oscParser(msg, parsedMsg)
 
-                    print("==> received %s" % repr(parsedMsg))
+                    stats.oscin(str(parsedMsg))
 
                     for i in parsedMsg :
                         midiMsg.extend(osc2Midi(i))
-                    stats.addoscin()
+
                 except Exception as e :
                     stats.error(e)
                     exc_type, exc_value, exc_traceback = sys.exc_info()
-                    print(repr(traceback.format_exception(exc_type, exc_value, exc_traceback)))
+                    print(str(traceback.format_exception(exc_type, exc_value, exc_traceback)))
                 if len(midiMsg) != 0 :
                     outq.put_nowait(midiMsg)
         except Exception as e :
@@ -217,7 +217,6 @@ def midiInput() :
                         sysexBuffer.append(i)
                         if i == 0xF7 :
                             toSend.extend(sysexBuffer)
-                            stats.addsysex()
                             sysexBuffer = []
                     elif i == 0xF0 :
                         sysexBuffer.append(i)
@@ -227,6 +226,7 @@ def midiInput() :
                 if len(toSend) == 0 :
                     continue
 
+                stats.midiin(toSend);
                 outq.put_nowait(toSend)
 
                 if config.sendport != 0 :
@@ -243,8 +243,6 @@ def midiInput() :
 
                     networkConn = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
                     networkConn.sendto(oscMsg, (config.sendhost, config.sendport))
-
-                stats.addmidiin()
         except Exception as e :
             stats.error(e)
             print("**> Midi Input Exception cought: %s" % e)
@@ -273,7 +271,7 @@ def midiOutput() :
                 display = ""
                 for i in midiMsg :
                     display = display + "0x%x " % i
-                print("<== sending midi %s" % display)
+                stats.midiout(display)
                 os.write(midiConn, bytearray(midiMsg))                  
         except Exception as e :
             stats.error(e)

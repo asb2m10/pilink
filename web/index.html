@@ -1,16 +1,8 @@
 <html>
 	<head>
 	    <link rel="stylesheet" href="css/angular-material.min.css">
+      <link rel="stylesheet" href="css/modal.css">      
 	</head>
-  <style>
-.contentdemoBasicUsage div.demo-content {
-  height: 600px; }
-.contentdemoBasicUsage div[ng-controller] {
-  height: 100%;
-  padding-bottom: 15px; }
-.contentdemoBasicUsage md-content {
-  padding: 24px; }
-  </style>
 
 	<body ng-app="app">
 	<script src="lib/angular.min.js"></script>
@@ -32,7 +24,6 @@
         <span flex></span>
       </div>
     </md-toolbar>
-
     <md-content layout-padding>
       <div>
         <form ng-submit="processForm()">
@@ -55,8 +46,7 @@
             <md-input-container class="md-block" flex-gt-sm>
               <label>Midi Device</label>
               <md-select ng-model="formData.mididev">
-                <md-select-label>{{ formData.mididev }}</md-select-label>            
-                <md-option ng-repeat="dev_lst in formData.mididev_lst" ng-value="dev_lst">
+                <md-option ng-repeat="dev_lst in mididev_lst" ng-value="dev_lst">
                   {{dev_lst}}
                 </md-option>
               </md-select>
@@ -70,33 +60,21 @@
         </form>
 
       </div>
-<!--    </md-content>
 
-    <md-content>-->
-      <div layout="column" ng-cloak>
+       <div ng-cloak>
         <md-toolbar>
           <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="Refresh">
+            <md-button class="md-icon-button" aria-label="Refresh" ng-click="refreshLogs()">
               <md-icon md-svg-icon="img/icons/ic_refresh_24px.svg"></md-icon>
             </md-button>        
             <h2 class="md-flex">Logging</h2>
+            <span flex></span>
+            midi in : {{midiin}} midi out : {{midiout}} osc : {{osc}}
           </div>
         </md-toolbar>
-        <md-content flex="" layout-padding="">
-          <p>Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis    </p>
-          <p>Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis    </p>
-          <p>Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis    </p>
-          <p>Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis    </p>
-          <p>Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis    </p>
-          <p>Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis    </p>
-          <p>Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis    </p>
-          <p>Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis    </p>
-          <p>Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis    </p>
-          <p>Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis    </p>
-          <p>Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis    </p>
-
+        <md-content flex="" layout-padding="column">
+          <pre>{{completeMsg}}</pre>
         </md-content>
-
       </div>
     </md-content>
   </md-content>

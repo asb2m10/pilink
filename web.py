@@ -35,14 +35,17 @@ class Service :
             for i in dir(config) :
                 if not i.startswith("__") :
                     ret[i] = eval("config.%s" % i)
-
-            #ret['mididev_lst'] = " ".join(glob.glob("/dev/midi*"))
-            ret['mididev_lst'] = "/dev/midi2 /dev/midi01"
+            ret['mididev_lst'] = glob.glob("/dev/midi*")
             ret['clientip'] = handler.client_address[0]
-            return ret;
         else :
-            print data
-            return ret;
+            config.sendhost = data['sendhost']
+            config.sendport = data['sendport']
+            config.receiveport = data['receiveport']
+            config.mididev = data['mididev']
+            pilink.saveConfig()
+            ret['return'] = "OKOK"
+        return ret;
+
 
     def shutdown(self, data, handler) :
         pilink.deamonize(pilink.shutdown)
@@ -51,6 +54,9 @@ class Service :
     def reboot(self, data, handler) :
         pilink.deamonize(pilink.reboot)
         return { "be right" : "back" }
+
+    def logs(self, data, handler) :
+        return stats.getStats();
 
     ### =====================================================================
     def call(self, name, data, handler) :

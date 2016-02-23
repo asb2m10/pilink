@@ -7,6 +7,10 @@ PiLink tries to mimick some of the functionalities of the "defunc" Missing Link 
 
 You can configure the device by using : http://`pi_ip_address`:8080
 
+Version 0.2
+-----------
+* Now comes with [AngularJS Material](https://material.angularjs.org/latest/) UI
+
 Prerequisites
 -------------
 * Linux/UNIX experience for installing
@@ -23,3 +27,6 @@ TODO
 * More stats and logging
 * Make a WIFI access point configuration out of the box for PiLink
 
+SCREENSHOT
+----------
+![Alt Text](docs/pilink_0.2.jpg)
