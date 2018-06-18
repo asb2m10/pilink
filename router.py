@@ -141,7 +141,7 @@ def osc2Midi(msg) :
                 token = oscToken.pop()
 
             # Reaktor vs TouchOSC protocol
-            if token.index('_') > 0 :
+            if token.find('_') >= 0 :
                 token.replace('_', ' ')
 
             msgToken = token.split()
