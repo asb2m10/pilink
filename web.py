@@ -36,6 +36,8 @@ class Service :
                 if not i.startswith("__") :
                     ret[i] = eval("config.%s" % i)
             ret['mididev_lst'] = glob.glob("/dev/midi*")
+            ret['mididev_lst'].extend(glob.glob("/dev/sound/midi*"))
+            ret['mididev_lst'].extend(glob.glob("/dev/snd/midi*"))
             ret['clientip'] = handler.client_address[0]
         else :
             config.sendhost = data['sendhost']
